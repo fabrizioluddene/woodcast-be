@@ -20,7 +20,7 @@ public class CalendarEntity {
 
     @Column(name="month")
     private Date month;
-    @Column(name="working_day",columnDefinition = "default '0.00'")
+    @Column(name="working_day")
     private BigDecimal workingDay;
 
     @ManyToOne
