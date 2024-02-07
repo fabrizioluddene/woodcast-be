@@ -10,5 +10,8 @@ import java.math.BigDecimal;
 public class Pivot {
     private Integer idCalendar;
     private BigDecimal workingDay;
+    private BigDecimal calculatedCost;
+    private BigDecimal calculatedProceeds;
+
 
 }

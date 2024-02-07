@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,7 +36,8 @@ public class ForecastFacade extends BaseFacade{
 
     @Autowired
     private CalendarRepository calendarRepository;
-
+    private static final BigDecimal ZERO = BigDecimal.ZERO;
+    private static final  BigDecimal U = BigDecimal.valueOf(100);
     public List< CalendarPivotResource> getAllCustomerBatchRegistry(String id) {
         List< CalendarPivotResource> calendarPivotResources =  new ArrayList<>();
         List<BatchRegistryEntity> batchRegistryEntities = batchRegistryServices.findByCustomer(id);
@@ -45,9 +47,11 @@ public class ForecastFacade extends BaseFacade{
             List<CalendarEntity> calendarEntities = calendarRepository.getByCustomerServiceEntitiesOrderByMonth(customerServiceEntity);
             String batchRegistryName= batchRegistryEntity.getOrder();
             Integer  batchRegistryId = batchRegistryEntity.getId();
+            BigDecimal proceeds = batchRegistryEntity.getExpectedMargin();
             calendarEntities.stream().forEach(calendarEntity -> {
                 String nome = calendarEntity.getResourceEntities().getNominative();
                 String data = dateToString(calendarEntity.getMonth());
+                BigDecimal rate = calendarEntity.getResourceEntities().getRateParamEntity().getRate();
                 BigDecimal numeroGiorni = calendarEntity.getWorkingDay();
                 String key = calendarEntity.getResourceEntities().getId()+"-"+batchRegistryId;
                 CalendarPivotResource pivotData = pivotMap.computeIfAbsent(key, k -> new CalendarPivotResource());
@@ -62,6 +66,13 @@ public class ForecastFacade extends BaseFacade{
                 Pivot pivot1 =  new Pivot();
                 pivot1.setIdCalendar(calendarEntity.getId());
                 pivot1.setWorkingDay(numeroGiorni);
+                BigDecimal calculatedCost = rate.multiply(numeroGiorni).setScale(2, RoundingMode.HALF_UP);
+                pivot1.setCalculatedCost(calculatedCost);
+                BigDecimal calculatedPerceed = ZERO;
+                if (ZERO.compareTo(calculatedCost) != 0){
+                    calculatedPerceed = calculatedCost.divide(U.subtract(proceeds).divide(U),2, RoundingMode.HALF_UP) ;
+                }
+                pivot1.setCalculatedProceeds(calculatedPerceed);
                 pivot.put(data, pivot1);
             });
         });
