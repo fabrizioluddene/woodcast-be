@@ -13,9 +13,9 @@ import java.util.Map;
 @Setter
 public class CalendarPivotResource extends Resource {
 
+    private String batchRegistryName;
 
-
-    Map<String, Pivot> pivot= new HashMap<>();
+    private Map<String, Pivot> pivot= new HashMap<>();
 
 
 

@@ -37,18 +37,22 @@ public class ForecastFacade extends BaseFacade{
     private CalendarRepository calendarRepository;
 
     public List< CalendarPivotResource> getAllCustomerBatchRegistry(String id) {
-
+        List< CalendarPivotResource> calendarPivotResources =  new ArrayList<>();
         List<BatchRegistryEntity> batchRegistryEntities = batchRegistryServices.findByCustomer(id);
         Map<String, CalendarPivotResource> pivotMap = new HashMap<>();
         batchRegistryEntities.stream().forEach(batchRegistryEntity -> {
             CustomerServiceEntity customerServiceEntity = batchRegistryEntity.getServiceParam();
             List<CalendarEntity> calendarEntities = calendarRepository.getByCustomerServiceEntitiesOrderByMonth(customerServiceEntity);
+            String batchRegistryName= batchRegistryEntity.getOrder();
+            Integer  batchRegistryId = batchRegistryEntity.getId();
             calendarEntities.stream().forEach(calendarEntity -> {
                 String nome = calendarEntity.getResourceEntities().getNominative();
                 String data = dateToString(calendarEntity.getMonth());
                 BigDecimal numeroGiorni = calendarEntity.getWorkingDay();
-                CalendarPivotResource pivotData = pivotMap.computeIfAbsent(nome, k -> new CalendarPivotResource());
+                String key = calendarEntity.getResourceEntities().getId()+"-"+batchRegistryId;
+                CalendarPivotResource pivotData = pivotMap.computeIfAbsent(key, k -> new CalendarPivotResource());
                 pivotData.setNominative(nome);
+                pivotData.setBatchRegistryName(batchRegistryName);
                 pivotData.setRate(calendarEntity.getResourceEntities().getRateParamEntity().getRate());
                 pivotData.setId(calendarEntity.getResourceEntities().getId());
                 pivotData.setGrade(calendarEntity.getResourceEntities().getRateParamEntity().getGrade());
