@@ -27,4 +27,8 @@ public class BatchRegistryServices {
 
         batchRegistryRepository.save(inputCallMap);
     }
+
+    public void delete(Integer id) {
+        batchRegistryRepository.deleteById(id);
+    }
 }

@@ -43,12 +43,14 @@ public class ForecastFacade extends BaseFacade{
         List<BatchRegistryEntity> batchRegistryEntities = batchRegistryServices.findByCustomer(id);
         Map<String, CalendarPivotResource> pivotMap = new HashMap<>();
         batchRegistryEntities.stream().forEach(batchRegistryEntity -> {
+
             CustomerServiceEntity customerServiceEntity = batchRegistryEntity.getServiceParam();
             List<CalendarEntity> calendarEntities = calendarRepository.getByCustomerServiceEntitiesOrderByMonth(customerServiceEntity);
             String batchRegistryName= batchRegistryEntity.getOrder();
             Integer  batchRegistryId = batchRegistryEntity.getId();
             BigDecimal proceeds = batchRegistryEntity.getExpectedMargin();
             calendarEntities.stream().forEach(calendarEntity -> {
+
                 String nome = calendarEntity.getResourceEntities().getNominative();
                 String data = dateToString(calendarEntity.getMonth());
                 BigDecimal rate = calendarEntity.getResourceEntities().getRateParamEntity().getRate();
@@ -76,15 +78,10 @@ public class ForecastFacade extends BaseFacade{
                 pivot.put(data, pivot1);
             });
         });
-
-
         return  new ArrayList<>(pivotMap.values());
     }
 
-    private BigDecimal getExpectedMarginEU(BatchRegistry batchRegistry) {
-        BigDecimal expectedMarginEU = (batchRegistry.getExpectedMargin().multiply(batchRegistry.getProceeds())).divide(BigDecimal.valueOf(100));
-        return expectedMarginEU;
-    }
+
 
     private String dateToString(Date data) {
         Map<String,String> stringStringMap =  new HashMap<>();

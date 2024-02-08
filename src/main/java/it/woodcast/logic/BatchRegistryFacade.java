@@ -46,4 +46,7 @@ public class BatchRegistryFacade extends BaseFacade{
         batchRegistryEntity.setServiceParam(customerServiceEntity);
         batchRegistryServices.save(batchRegistryEntity);
     }
+    public void delete(Integer id) {
+        batchRegistryServices.delete(id);
+    }
 }

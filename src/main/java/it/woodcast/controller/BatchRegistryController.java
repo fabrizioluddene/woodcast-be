@@ -25,4 +25,10 @@ public class BatchRegistryController {
         batchRegistryFacade.save(batchRegistry);
         return ResponseEntity.ok("ok");
     }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable Integer id) {
+        batchRegistryFacade.delete(id);
+        return ResponseEntity.ok("Deleted successfully");
+    }
 }
