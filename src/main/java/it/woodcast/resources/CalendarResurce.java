@@ -11,5 +11,5 @@ import java.util.List;
 public class CalendarResurce {
 
     private List<Resource> resource;
-    private CustomerService customerService;
+    private BatchRegistry customerService;
 }

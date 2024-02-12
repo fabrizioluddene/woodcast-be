@@ -2,16 +2,12 @@ package it.woodcast.controller;
 
 import it.woodcast.logic.CalendarFacade;
 import it.woodcast.logic.ForecastFacade;
-import it.woodcast.resources.CalendarPivotResource;
-import it.woodcast.resources.CalendarResurce;
-import it.woodcast.resources.CalendarSaveResurce;
-import it.woodcast.resources.ForecastResources;
+import it.woodcast.resources.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/forecast")
@@ -24,9 +20,14 @@ public class ForecastController {
 
 
     @GetMapping("/{customerId}")
-    public ResponseEntity<List<CalendarPivotResource>> findAllBatchRegistry(@PathVariable String customerId) {
+    public ResponseEntity<List<CalendarPivotResource>> findAllBatchRegistry(@PathVariable String customerId,@RequestParam(value = "batchRegistryId",required = false) String batchRegistryId) {
 
-        return ResponseEntity.ok(customerFacade.getAllCustomerBatchRegistry(customerId));
+        return ResponseEntity.ok(customerFacade.getAllCustomerBatchRegistry(customerId,batchRegistryId));
+    }
+    @GetMapping("/costi-ricavi/{customerId}")
+    public ResponseEntity<RevenuesCostsResource> calculate(@PathVariable String customerId, @RequestParam(value ="batchRegistryId",required = false) String batchRegistryId) {
+
+        return ResponseEntity.ok(customerFacade.calcolate(customerId,batchRegistryId));
     }
     @PostMapping("/create")
     public ResponseEntity<List<CalendarResurce>> create(@RequestBody CalendarResurce calendarResurce) {

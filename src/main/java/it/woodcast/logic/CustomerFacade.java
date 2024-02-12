@@ -3,16 +3,15 @@ package it.woodcast.logic;
 import it.woodcast.entity.BatchRegistryEntity;
 import it.woodcast.entity.CalendarEntity;
 import it.woodcast.entity.CustomerEntity;
-import it.woodcast.entity.CustomerServiceEntity;
 import it.woodcast.mapper.BatchRegistryMapper;
 import it.woodcast.repository.CalendarRepository;
 import it.woodcast.resources.BatchRegistry;
 import it.woodcast.resources.Customer;
-import it.woodcast.resources.CustomerService;
 import it.woodcast.services.BatchRegistryServices;
 import it.woodcast.services.CustomerServiceService;
 import it.woodcast.services.CustomerServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -20,7 +19,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Component
 public class CustomerFacade extends BaseFacade {
     @Autowired
     private CustomerServices customerServices;
@@ -55,8 +54,8 @@ public class CustomerFacade extends BaseFacade {
         batchRegistryEntities.stream().forEach(batchRegistryEntity -> {
 
             BatchRegistry batchRegistry =  batchRegistryMapper.mapAtoB(batchRegistryEntity);
-            CustomerServiceEntity customerServiceEntity= batchRegistryEntity.getServiceParam();
-            List<CalendarEntity> calendarEntities = calendarRepository.getByCustomerServiceEntitiesOrderByMonth(customerServiceEntity);
+
+            List<CalendarEntity> calendarEntities = calendarRepository.getByCustomerServiceEntitiesOrderByMonth(batchRegistryEntity);
 
 
             calendarEntities.stream().forEach(calendarEntity->{
@@ -77,10 +76,10 @@ public class CustomerFacade extends BaseFacade {
             batchRegistry.setOverallCosts(batchRegistry.getProceeds().subtract(expectedMarginEU).setScale(2, RoundingMode.HALF_UP));
             batchRegistry.setDeltaEffectiveCost(batchRegistry.getOverallCosts().subtract(batchRegistry.getEffectiveCosts()).setScale(2, RoundingMode.HALF_UP));
             batchRegistry.setExpectedMarginEU(expectedMarginEU.setScale(2, RoundingMode.HALF_UP));
-            batchRegistry.setProceedsPlafond((BigDecimal.valueOf(batchRegistry.getProceedsDayPlafond())).multiply(customerServiceEntity.getRate()).setScale(2, RoundingMode.HALF_UP));
+            batchRegistry.setProceedsPlafond((BigDecimal.valueOf(batchRegistry.getProceedsDayPlafond())).multiply(batchRegistryEntity.getVendorRate()).setScale(2, RoundingMode.HALF_UP));
             batchRegistry.setDaysRemaining(batchRegistry.getProceedsDayPlafond());
             batchRegistry.setProceedsRemaining(batchRegistry.getProceedsPlafond().setScale(2, RoundingMode.HALF_UP));
-            batchRegistry.setCustomerService(batchRegistryEntity.getServiceParam().getName());
+            batchRegistry.setCustomerService(batchRegistryEntity.getOrder());
             batchRegistries.add(batchRegistry);
         });
 
@@ -92,11 +91,11 @@ public class CustomerFacade extends BaseFacade {
         return expectedMarginEU;
     }
 
-    public List<CustomerService> getAllCustomerService(Integer customerId){
-        List<CustomerService> customerServices =  new ArrayList<>();
+    public List<BatchRegistry> getAllCustomerService(Integer customerId){
+        List<BatchRegistry> customerServices =  new ArrayList<>();
         CustomerEntity customer = this.customerServices.findById(customerId);
         customerServicesService.findByCustomer(customer).stream().forEach(customerServiceEntity -> {
-            CustomerService customerService = this.modelMapper.map(customerServiceEntity, CustomerService.class);
+            BatchRegistry customerService = this.modelMapper.map(customerServiceEntity, BatchRegistry.class);
             customerServices.add(customerService);
         });
         return customerServices;

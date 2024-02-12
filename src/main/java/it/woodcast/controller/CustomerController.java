@@ -25,7 +25,7 @@ public class CustomerController {
     }
 
     @GetMapping("{customerId}/service")
-    public ResponseEntity<List<CustomerService>> findAllCustomerService(@PathVariable Integer customerId) {
+    public ResponseEntity<List<BatchRegistry>> findAllCustomerService(@PathVariable Integer customerId) {
         return  ResponseEntity.ok(customerFacade.getAllCustomerService(customerId));
     }
 

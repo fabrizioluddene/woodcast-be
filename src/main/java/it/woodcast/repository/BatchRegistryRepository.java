@@ -10,7 +10,9 @@ import java.util.List;
 @Repository
 public interface BatchRegistryRepository  extends JpaRepository<BatchRegistryEntity, Integer> {
 
-    @Query("select bre from BatchRegistryEntity bre outer join fetch bre.serviceParam sp where sp.customer.id = :id order by order ")
+    @Query("select bre from BatchRegistryEntity bre  where bre.customer.id = :id order by order ")
     List<BatchRegistryEntity> findByCustomer(String id);
+    @Query("select bre from BatchRegistryEntity bre  where bre.customer.id = :id and id = :idBatchRegistry order by order ")
+    List<BatchRegistryEntity> findByCustomerAndId(String id,String idBatchRegistry);
 
 }

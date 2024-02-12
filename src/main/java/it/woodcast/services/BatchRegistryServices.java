@@ -13,18 +13,20 @@ public class BatchRegistryServices {
     @Autowired
     private BatchRegistryRepository batchRegistryRepository;
     public List<BatchRegistryEntity> findAll() {
-
-
         return batchRegistryRepository.findAll();
     }
     public List<BatchRegistryEntity> findByCustomer(String id) {
-
-
         return batchRegistryRepository.findByCustomer(id);
     }
+    public List<BatchRegistryEntity> findByCustomerAndId(String id,String idBatchRegistry) {
+        return batchRegistryRepository.findByCustomerAndId(id,idBatchRegistry);
+    }
+
 
     public void save(BatchRegistryEntity inputCallMap) {
-
         batchRegistryRepository.save(inputCallMap);
+    }
+    public void delete(Integer id){
+        batchRegistryRepository.delete(batchRegistryRepository.findById(id).get());
     }
 }
