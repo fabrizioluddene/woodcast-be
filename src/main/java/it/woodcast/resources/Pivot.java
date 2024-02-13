@@ -9,9 +9,9 @@ import java.math.BigDecimal;
 @Setter
 public class Pivot {
     private Integer idCalendar;
-    private BigDecimal workingDay;
-    private BigDecimal calculatedCost;
-    private BigDecimal calculatedProceeds;
+    private BigDecimal workingDay = BigDecimal.ZERO;
+    private BigDecimal calculatedCost = BigDecimal.ZERO;
+    private BigDecimal calculatedProceeds = BigDecimal.ZERO;
 
 
 }

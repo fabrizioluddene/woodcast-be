@@ -6,6 +6,7 @@ import it.woodcast.enumeration.RulesEnum;
 import it.woodcast.mapper.BatchRegistryMapper;
 import it.woodcast.repository.CalendarRepository;
 import it.woodcast.resources.*;
+import it.woodcast.resources.dashboard.graph.CalendarGraphDashbordResource;
 import it.woodcast.services.BatchRegistryServices;
 import it.woodcast.services.CustomerServices;
 
@@ -38,9 +39,74 @@ public class ForecastFacade extends BaseFacade {
     private static final BigDecimal U = BigDecimal.valueOf(100);
 
 
+    public List<CalendarGraphDashbordResource>  getAllCustomerBatchRegistryDashboard(String id, String batchRegistriId)  {
+
+        List<BatchRegistryEntity> batchRegistryEntities = getBatchRegistryEntities(id, batchRegistriId);
+
+        Map<String, CalendarPivotDashbordResource> pivotMap = new HashMap<>();
+        batchRegistryEntities.stream().forEach(batchRegistryEntity -> {
+
+            List<CalendarEntity> calendarEntities = calendarRepository.getByCustomerServiceEntitiesOrderByMonth(batchRegistryEntity);
+            String batchRegistryName = batchRegistryEntity.getOrder();
+
+            BigDecimal proceeds = batchRegistryEntity.getExpectedMargin();
+            String dataToCheck ="";
+            Pivot pivot1 = new Pivot();
+            for (CalendarEntity calendarEntity : calendarEntities) {
+
+                String data = dateToString(calendarEntity.getMonth());
+
+                if(!data.equals(dataToCheck)){
+                    pivot1 = new Pivot();
+                }
+                dataToCheck=data;
+
+                BigDecimal rate = calendarEntity.getResourceEntities().getRateParamEntity().getRate();
+                BigDecimal numeroGiorni = calendarEntity.getWorkingDay();
+                CalendarPivotDashbordResource pivotData = pivotMap.computeIfAbsent(batchRegistryName, k -> new CalendarPivotDashbordResource());
+                pivotData.setOrder(batchRegistryName);
+                Map<String, Pivot> pivot = pivotData.getPivot();
+                pivot1.setWorkingDay(pivot1.getWorkingDay().add( numeroGiorni));
+                BigDecimal calculatedCost = rate.multiply(numeroGiorni).setScale(2, RoundingMode.HALF_UP);
+                pivot1.setCalculatedCost(pivot1.getCalculatedCost().add(calculatedCost));
+                BigDecimal calculatedPerceed = ZERO;
+                if (ZERO.compareTo(calculatedCost) != 0) {
+                    calculatedPerceed = calculatedCost.divide(U.subtract(proceeds).divide(U), 2, RoundingMode.HALF_UP);
+                }
+                pivot1.setCalculatedProceeds(pivot1.getCalculatedProceeds().add( calculatedPerceed));
+                pivot.put(data, pivot1);
+            }
+        });
+        List<CalendarPivotDashbordResource> calendarPivotDashbordResources = new ArrayList<>(pivotMap.values());
+        List<CalendarGraphDashbordResource> graphDashbordResources = new ArrayList<>();
+        calendarPivotDashbordResources.stream().forEach(r->{
 
 
-    public List<CalendarPivotResource> getAllCustomerBatchRegistry(String id, String batchRegistriId) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+            CalendarGraphDashbordResource calendarGraphDashbordResource = new CalendarGraphDashbordResource();
+            calendarGraphDashbordResource.setName(r.getOrder());
+            List<BigDecimal> value = new ArrayList<>();
+            value.add(r.getPivot().get("gennaio").getCalculatedProceeds());
+            value.add(r.getPivot().get("febbraio").getCalculatedProceeds());
+            value.add(r.getPivot().get("marzo").getCalculatedProceeds());
+            value.add(r.getPivot().get("aprile").getCalculatedProceeds());
+            value.add(r.getPivot().get("maggio").getCalculatedProceeds());
+            value.add(r.getPivot().get("giugno").getCalculatedProceeds());
+            value.add(r.getPivot().get("luglio").getCalculatedProceeds());
+            value.add(r.getPivot().get("agosto").getCalculatedProceeds());
+            value.add(r.getPivot().get("settembre").getCalculatedProceeds());
+            value.add(r.getPivot().get("ottobbre").getCalculatedProceeds());
+            value.add(r.getPivot().get("novembre").getCalculatedProceeds());
+            value.add(r.getPivot().get("dicembre").getCalculatedProceeds());
+            calendarGraphDashbordResource.setData(value);
+            graphDashbordResources.add(calendarGraphDashbordResource);
+
+
+        });
+
+        return graphDashbordResources;
+    }
+
+    public List<CalendarPivotResource> getAllCustomerBatchRegistry(String id, String batchRegistriId)  {
 
         List<BatchRegistryEntity> batchRegistryEntities = getBatchRegistryEntities(id, batchRegistriId);
 

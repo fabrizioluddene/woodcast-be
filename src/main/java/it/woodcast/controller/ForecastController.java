@@ -3,9 +3,13 @@ package it.woodcast.controller;
 import it.woodcast.logic.CalendarFacade;
 import it.woodcast.logic.ForecastFacade;
 import it.woodcast.resources.*;
+import it.woodcast.resources.dashboard.graph.CalendarGraphDashbordResource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -29,6 +33,11 @@ public class ForecastController {
     public ResponseEntity<RevenuesCostsResource> calculate(@RequestHeader String authorization,@PathVariable String customerId, @RequestParam(value ="batchRegistryId",required = false) String batchRegistryId) {
 
         return ResponseEntity.ok(customerFacade.calculate(customerId,batchRegistryId));
+    }
+    @GetMapping("dashboard/{customerId}")
+    public ResponseEntity<List<CalendarGraphDashbordResource>> findAllBatchRegistryDasboard(@RequestHeader(value = "Authorization" ,required = false) String authorization, @PathVariable String customerId, @RequestParam(value = "batchRegistryId",required = false) String batchRegistryId) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+
+        return ResponseEntity.ok(customerFacade.getAllCustomerBatchRegistryDashboard(customerId,batchRegistryId));
     }
     @PostMapping("/create")
     public ResponseEntity<List<CalendarResurce>> create(@RequestHeader String authorization,@RequestBody CalendarResurce calendarResurce) {
