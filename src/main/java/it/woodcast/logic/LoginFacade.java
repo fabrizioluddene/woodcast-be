@@ -21,11 +21,22 @@ public class LoginFacade extends BaseFacade {
     @Autowired
     private UserService userService;
 
-    public String login( String password,String username) {
+    public UserResource login( String password,String username) {
         UserEntity userEntity = userService.getUserByPasswordAndUsername(password, username);
-        UserResource userResource = modelMapper.map(userEntity, UserResource.class);
-        userResource.setRules(setRules(userEntity));
-        return jwtTokenProvider.generateToken(userResource);
+        UserResource userResource;
+        if (userEntity != null){
+            userResource = modelMapper.map(userEntity, UserResource.class);
+            userResource.setRules(setRules(userEntity));
+
+            userResource.setPassword("");
+            userResource.setJwt(jwtTokenProvider.generateToken(userResource));
+            userResource.setLogged(true);
+        }else{
+            userResource = new UserResource();
+            userResource.setLogged(false);
+        }
+
+        return userResource;
 
     }
     private List<RulesEnum> setRules(UserEntity userEntity) {

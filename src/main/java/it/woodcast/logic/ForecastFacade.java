@@ -2,25 +2,22 @@ package it.woodcast.logic;
 
 import it.woodcast.entity.BatchRegistryEntity;
 import it.woodcast.entity.CalendarEntity;
+import it.woodcast.enumeration.RulesEnum;
 import it.woodcast.mapper.BatchRegistryMapper;
 import it.woodcast.repository.CalendarRepository;
 import it.woodcast.resources.*;
 import it.woodcast.services.BatchRegistryServices;
-import it.woodcast.services.CustomerServiceService;
 import it.woodcast.services.CustomerServices;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.*;
 
 @Component
 
@@ -33,23 +30,19 @@ public class ForecastFacade extends BaseFacade {
     @Autowired
     private BatchRegistryMapper batchRegistryMapper;
 
-    @Autowired
-    private CustomerServiceService customerServicesService;
+
 
     @Autowired
     private CalendarRepository calendarRepository;
     private static final BigDecimal ZERO = BigDecimal.ZERO;
     private static final BigDecimal U = BigDecimal.valueOf(100);
 
-    public List<CalendarPivotResource> getAllCustomerBatchRegistry(String id, String batchRegistriId) {
-        List<BatchRegistryEntity> batchRegistryEntities;
 
-        if (batchRegistriId == null || "".equals(batchRegistriId)) {
-            batchRegistryEntities = batchRegistryServices.findByCustomer(id);
-        } else {
-            batchRegistryEntities = batchRegistryServices.findByCustomerAndId(id, batchRegistriId);
-        }
 
+
+    public List<CalendarPivotResource> getAllCustomerBatchRegistry(String id, String batchRegistriId) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+
+        List<BatchRegistryEntity> batchRegistryEntities = getBatchRegistryEntities(id, batchRegistriId);
 
         Map<String, CalendarPivotResource> pivotMap = new HashMap<>();
         batchRegistryEntities.stream().forEach(batchRegistryEntity -> {
@@ -91,15 +84,29 @@ public class ForecastFacade extends BaseFacade {
         return new ArrayList<>(pivotMap.values());
     }
 
-    public RevenuesCostsResource calcolate(String id, String batchRegistriId) {
-        RevenuesCostsResource revenuesCostsResource = new RevenuesCostsResource();
+    private List<BatchRegistryEntity> getBatchRegistryEntities(String id, String batchRegistriId) {
+        JwtUser jwtUser = this.getJwtUser();
         List<BatchRegistryEntity> batchRegistryEntities;
 
-        if (batchRegistriId == null || "".equals(batchRegistriId)) {
-            batchRegistryEntities = batchRegistryServices.findByCustomer(id);
-        } else {
-            batchRegistryEntities = batchRegistryServices.findByCustomerAndId(id, batchRegistriId);
+        if(jwtUser.getRules().contains(RulesEnum.PRACTICE_LEADER)) {
+            if (batchRegistriId == null || "".equals(batchRegistriId)) {
+                batchRegistryEntities = batchRegistryServices.findByCustomer(id);
+            } else {
+                batchRegistryEntities = batchRegistryServices.findByCustomerAndId(id, batchRegistriId);
+            }
+        }else{
+            if (batchRegistriId == null || "".equals(batchRegistriId)) {
+                batchRegistryEntities = batchRegistryServices.findByCustomerUserId(id, jwtUser.getUserId());
+            } else {
+                batchRegistryEntities = batchRegistryServices.findByCustomerAndIdAndUserId(id, batchRegistriId, jwtUser.getUserId());
+            }
         }
+        return batchRegistryEntities;
+    }
+
+    public RevenuesCostsResource calculate(String id, String batchRegistriId) {
+        RevenuesCostsResource revenuesCostsResource = new RevenuesCostsResource();
+        List<BatchRegistryEntity> batchRegistryEntities = getBatchRegistryEntities(id, batchRegistriId);
         Map<String, CalendarPivotResource> pivotMap = new HashMap<>();
         batchRegistryEntities.stream().forEach(batchRegistryEntity -> {
             BigDecimal proceeds = batchRegistryEntity.getExpectedMargin();

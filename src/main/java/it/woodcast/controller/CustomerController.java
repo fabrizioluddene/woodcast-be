@@ -16,21 +16,21 @@ public class CustomerController {
     private CustomerFacade customerFacade;
 
     @GetMapping("find-all")
-    public ResponseEntity<List<Customer>> findAll() {
+    public ResponseEntity<List<Customer>> findAll(@RequestHeader String authorization) {
         return ResponseEntity.ok(customerFacade.findAllCustomer());
     }
     @GetMapping("batch-registry/{customerId}")
-    public ResponseEntity<List<BatchRegistry>> findAllBatchRegistry(@PathVariable String customerId) {
+    public ResponseEntity<List<BatchRegistry>> findAllBatchRegistry(@RequestHeader String authorization,@PathVariable String customerId) {
         return ResponseEntity.ok(customerFacade.getAllCustomerBatchRegistry(customerId));
     }
 
     @GetMapping("{customerId}/service")
-    public ResponseEntity<List<BatchRegistry>> findAllCustomerService(@PathVariable Integer customerId) {
+    public ResponseEntity<List<BatchRegistry>> findAllCustomerService(@RequestHeader String authorization,@PathVariable Integer customerId) {
         return  ResponseEntity.ok(customerFacade.getAllCustomerService(customerId));
     }
 
     @PostMapping("save")
-    public ResponseEntity<Customer> save(@RequestBody Customer resource) {
+    public ResponseEntity<Customer> save(@RequestHeader String authorization,@RequestBody Customer resource) {
         return ResponseEntity.ok(customerFacade.save(resource));
     }
 }

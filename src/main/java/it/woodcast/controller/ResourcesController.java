@@ -19,20 +19,22 @@ public class ResourcesController {
     private ResourcesFacade resourcesFacade;
 
     @GetMapping("find-all")
-    public ResponseEntity<ResourcesResponce> findAll() {
+    public ResponseEntity<ResourcesResponce> findAll(@RequestHeader String authorization) {
         return ResponseEntity.ok(resourcesFacade.findAllResources());
     }
+
     @GetMapping("find-all/calendar/service-registry/{idServiceRegistry}")
-public ResponseEntity<ResourcesResponce> findAllResourceCalendar(@PathVariable Integer idServiceRegistry, @RequestParam("typeSearch") String typeSearch) {
-        return ResponseEntity.ok(resourcesFacade.findAllResourceCalendar(idServiceRegistry,typeSearch));
+    public ResponseEntity<ResourcesResponce> findAllResourceCalendar(@RequestHeader String authorization,@PathVariable Integer idServiceRegistry, @RequestParam("typeSearch") String typeSearch) {
+        return ResponseEntity.ok(resourcesFacade.findAllResourceCalendar(idServiceRegistry, typeSearch));
     }
+
     @PostMapping("save")
-    public ResponseEntity<Integer> save(@RequestBody Resource resource) {
+    public ResponseEntity<Integer> save(@RequestHeader String authorization,@RequestBody Resource resource) {
         return ResponseEntity.ok(resourcesFacade.save(resource));
     }
 
     @GetMapping("rate-param/find-all")
-    public ResponseEntity<List<RateParamResource>> findAllResourceParam() {
+    public ResponseEntity<List<RateParamResource>> findAllResourceParam(@RequestHeader String authorization) {
         return ResponseEntity.ok(resourcesFacade.findAllResourceParam());
     }
 

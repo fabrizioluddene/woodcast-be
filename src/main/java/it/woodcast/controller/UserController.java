@@ -17,7 +17,7 @@ public class UserController {
     private LoginFacade loginFacade;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserResource userResource) {
+    public ResponseEntity<UserResource> login(@RequestBody UserResource userResource) {
         return ResponseEntity.ok(loginFacade.login(userResource.getPassword(),userResource.getUsername()));
     }
 

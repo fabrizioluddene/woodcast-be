@@ -18,10 +18,11 @@ public class UserResource {
     private String surname;
     private String username;
     private String password;
-
+    private boolean logged;
+    private String jwt;
     List<RulesEnum> rules;
 
-    public void setPassword(String password){
+    public void setPassword(String password) {
         this.password = Base64.getEncoder().encodeToString(password.getBytes());
     }
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @RestController
@@ -20,22 +21,22 @@ public class ForecastController {
 
 
     @GetMapping("/{customerId}")
-    public ResponseEntity<List<CalendarPivotResource>> findAllBatchRegistry(@PathVariable String customerId,@RequestParam(value = "batchRegistryId",required = false) String batchRegistryId) {
+    public ResponseEntity<List<CalendarPivotResource>> findAllBatchRegistry(@RequestHeader String authorization,@PathVariable String customerId,@RequestParam(value = "batchRegistryId",required = false) String batchRegistryId) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 
         return ResponseEntity.ok(customerFacade.getAllCustomerBatchRegistry(customerId,batchRegistryId));
     }
     @GetMapping("/costi-ricavi/{customerId}")
-    public ResponseEntity<RevenuesCostsResource> calculate(@PathVariable String customerId, @RequestParam(value ="batchRegistryId",required = false) String batchRegistryId) {
+    public ResponseEntity<RevenuesCostsResource> calculate(@RequestHeader String authorization,@PathVariable String customerId, @RequestParam(value ="batchRegistryId",required = false) String batchRegistryId) {
 
-        return ResponseEntity.ok(customerFacade.calcolate(customerId,batchRegistryId));
+        return ResponseEntity.ok(customerFacade.calculate(customerId,batchRegistryId));
     }
     @PostMapping("/create")
-    public ResponseEntity<List<CalendarResurce>> create(@RequestBody CalendarResurce calendarResurce) {
+    public ResponseEntity<List<CalendarResurce>> create(@RequestHeader String authorization,@RequestBody CalendarResurce calendarResurce) {
         return ResponseEntity.ok(calendarFacade.createAll(calendarResurce));
     }
 
     @PostMapping("/save")
-    public ResponseEntity<CalendarResurce> save(@RequestBody CalendarSaveResurce calendarResurce) {
+    public ResponseEntity<CalendarResurce> save(@RequestHeader String authorization,@RequestBody CalendarSaveResurce calendarResurce) {
         return ResponseEntity.ok(calendarFacade.save(calendarResurce));
     }
 
