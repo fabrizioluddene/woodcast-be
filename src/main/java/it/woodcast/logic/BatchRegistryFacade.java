@@ -1,20 +1,22 @@
 package it.woodcast.logic;
 
 import it.woodcast.entity.BatchRegistryEntity;
-import it.woodcast.entity.CustomerServiceEntity;
+import it.woodcast.entity.CustomerEntity;
 import it.woodcast.mapper.BatchRegistryMapper;
 import it.woodcast.resources.BatchRegistry;
 import it.woodcast.services.BatchRegistryServices;
-import it.woodcast.services.CustomerServiceService;
+import it.woodcast.services.CalendarService;
+import it.woodcast.services.CustomerServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Component
 public class BatchRegistryFacade extends BaseFacade{
+
 
     @Autowired
     private BatchRegistryServices batchRegistryServices;
@@ -23,16 +25,20 @@ public class BatchRegistryFacade extends BaseFacade{
     private BatchRegistryMapper batchRegistryMapper;
 
     @Autowired
-    private CustomerServiceService customerServiceService;
+    private CustomerServices customerService;
+
+    @Autowired
+    private CalendarService calendarService;
 
     public List<BatchRegistry> getBatchRegistryResources() {
+
         List<BatchRegistryEntity> batchRegistryEntities =  batchRegistryServices.findAll();
         List<BatchRegistry> batchRegistries = new ArrayList<>();
                 batchRegistryEntities.stream().forEach(batchRegistryEntity -> {
                     BatchRegistry batchRegistry =  batchRegistryMapper.mapAtoB(batchRegistryEntity);
-                    batchRegistry.setIdCustomerService(batchRegistryEntity.getServiceParam().getId());
-                    batchRegistry.setCustomerService(batchRegistryEntity.getServiceParam().getName());
-                    batchRegistry.setProceedsPlafond((BigDecimal.valueOf(batchRegistry.getProceedsDayPlafond())).multiply(batchRegistryEntity.getServiceParam().getRate()));
+                    batchRegistry.setIdCustomerService(batchRegistryEntity.getId());
+                    batchRegistry.setCustomerService(batchRegistryEntity.getOrder());
+                    batchRegistry.setProceedsPlafond((BigDecimal.valueOf(batchRegistry.getProceedsDayPlafond())).multiply(batchRegistryEntity.getVendorRate()));
                     batchRegistry.setDaysRemaining(batchRegistry.getProceedsDayPlafond());
                     batchRegistry.setProceedsRemaining(batchRegistry.getProceedsPlafond());
                     batchRegistries.add(batchRegistry);
@@ -40,13 +46,15 @@ public class BatchRegistryFacade extends BaseFacade{
         return batchRegistries;
     }
     public void save(BatchRegistry batchRegistry){
-        CustomerServiceEntity customerServiceEntity = customerServiceService.findById(batchRegistry.getIdCustomerService());
+        CustomerEntity customerEntity = customerService.findById(batchRegistry.getIdCustomerService());
 
         BatchRegistryEntity  batchRegistryEntity= modelMapper.map(batchRegistry,BatchRegistryEntity.class);
-        batchRegistryEntity.setServiceParam(customerServiceEntity);
+        batchRegistryEntity.setCustomer(customerEntity);
         batchRegistryServices.save(batchRegistryEntity);
     }
-    public void delete(Integer id) {
+
+    public void deleteAllByCustomer(Integer id){
+        calendarService.deleteAllByCustomer(id);
         batchRegistryServices.delete(id);
     }
 }

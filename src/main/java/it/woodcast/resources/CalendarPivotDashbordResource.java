@@ -1,20 +1,19 @@
 package it.woodcast.resources;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import it.woodcast.resources.dashboard.graph.CalendarGraphDashbordResource;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Getter
 @Setter
-public class CalendarPivotResource extends Resource {
-
-    private String batchRegistryName;
-
+public class CalendarPivotDashbordResource {
+    private String order;
     private Map<String, Pivot> pivot= new HashMap<>();
+
 
 }

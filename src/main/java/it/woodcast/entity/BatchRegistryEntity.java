@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,18 +33,16 @@ public class BatchRegistryEntity {
     private String note;
     @Column(name = "br_proceeds_day_plafond")
     private BigDecimal proceedsDayPlafond;
-
     @Column(name = "br_days_remaining")
     private BigDecimal daysRemaining;
-
     @Column(name = "br_expected_margin")
     private BigDecimal expectedMargin;
-
+    @Column(name = "br_vendor_rate")
+    private BigDecimal vendorRate;
     @ManyToOne
-    @JoinColumn(name = "br_client_service_id", referencedColumnName = "cs_id")
-    private CustomerServiceEntity serviceParam;
-
-
+    private CustomerEntity customer;
+    @ManyToMany
+    private List<UserEntity> user;
 
 
 }

@@ -10,4 +10,5 @@ import java.util.List;
 public interface ResourceParamRepository extends JpaRepository<RateParamEntity, Integer> {
 
     public List<RateParamEntity> findAllByOrderByGradeAsc();
+
 }

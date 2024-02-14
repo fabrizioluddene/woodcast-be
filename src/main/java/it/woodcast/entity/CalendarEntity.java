@@ -26,7 +26,7 @@ public class CalendarEntity {
     @ManyToOne
     private ResourceEntity resourceEntities;
     @ManyToOne
-    private CustomerServiceEntity customerServiceEntities;
+    private BatchRegistryEntity customerServiceEntities;
 
 
 }

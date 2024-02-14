@@ -31,6 +31,4 @@ public class ResourceEntity {
     @ManyToOne
     @JoinColumn(name = "r_rate_param_id", referencedColumnName = "rrp_id")
     private RateParamEntity rateParamEntity;
-
-
 }

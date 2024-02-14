@@ -16,19 +16,21 @@ public class BatchRegistryController {
     private BatchRegistryFacade batchRegistryFacade;
 
     @GetMapping("find-all")
-    public ResponseEntity<List<BatchRegistry>> findAll() {
+    public ResponseEntity<List<BatchRegistry>> findAll(@RequestHeader String authorization) {
         return ResponseEntity.ok(batchRegistryFacade.getBatchRegistryResources());
     }
 
     @PostMapping("save")
-    public ResponseEntity<String> save(@RequestBody BatchRegistry batchRegistry) {
+    public ResponseEntity<String> save(@RequestHeader String authorization,@RequestBody BatchRegistry batchRegistry) {
         batchRegistryFacade.save(batchRegistry);
         return ResponseEntity.ok("ok");
     }
 
-    @DeleteMapping("delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable Integer id) {
-        batchRegistryFacade.delete(id);
-        return ResponseEntity.ok("Deleted successfully");
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> delete(@RequestHeader String authorization,@PathVariable Integer id) {
+        batchRegistryFacade.deleteAllByCustomer(id);
+        return ResponseEntity.ok().build();
+
     }
+
 }

@@ -1,12 +1,14 @@
 package it.woodcast.logic;
 
+import it.woodcast.entity.BatchRegistryEntity;
 import it.woodcast.entity.CalendarEntity;
-import it.woodcast.entity.CustomerServiceEntity;
 import it.woodcast.entity.ResourceEntity;
 import it.woodcast.repository.CalendarRepository;
+import it.woodcast.resources.BatchRegistry;
 import it.woodcast.resources.CalendarResurce;
 import it.woodcast.resources.CalendarSaveResurce;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-@Service
+@Component
 public class CalendarFacade {
     @Autowired
     CalendarRepository calendarRepository;
@@ -24,7 +26,7 @@ public class CalendarFacade {
 
         List<Date> day = gerateCalendar();
         List<CalendarEntity> calendarEntities = new ArrayList<>();
-        CustomerServiceEntity customerServiceEntities = new CustomerServiceEntity();
+        BatchRegistryEntity customerServiceEntities = new BatchRegistryEntity();
         customerServiceEntities.setId(calendarResurce.getCustomerService().getId());
         calendarResurce.getResource().stream().forEach(resource -> {
             day.stream().forEach(date -> {

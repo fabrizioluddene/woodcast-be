@@ -33,6 +33,7 @@ public class BatchRegistry {
     private BigDecimal calculateMargin= BigDecimal.ZERO;
     private BigDecimal effectiveMUP= BigDecimal.ZERO;
     private BigDecimal deltaEffectiveCost= BigDecimal.ZERO;
+    private BigDecimal vendorRate;
 
 
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ResourceServices {
@@ -18,6 +19,18 @@ public class ResourceServices {
 
         return resourceRepository.findAll();
     }
+    public List<ResourceEntity> findAllResourceCalendar(Integer idServiceRegistry) {
+
+
+        return resourceRepository.findAllResourceCalendar(Optional.of(idServiceRegistry));
+    }
+    public List<ResourceEntity> findAllResourceNotCalendar(Integer idServiceRegistry) {
+
+
+        return resourceRepository.findAllResourceNotCalendar(Optional.of(idServiceRegistry));
+    }
+
+
     public Integer save(ResourceEntity resourceEntity) {
 
         ResourceEntity resourceEntityRet = resourceRepository.save(resourceEntity);

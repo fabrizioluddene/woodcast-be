@@ -17,4 +17,10 @@ public class CalendarService {
         return calendarRepository.saveAll(calendarEntities);
 
     }
+    public void deleteAllByCustomer(Integer id){
+        calendarRepository.deleteAllByCustomer(id);
+    }
+
+
+
 }
