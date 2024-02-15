@@ -2,6 +2,7 @@ package it.woodcast.logic;
 
 import it.woodcast.entity.BatchRegistryEntity;
 import it.woodcast.entity.CustomerEntity;
+import it.woodcast.entity.UserEntity;
 import it.woodcast.mapper.BatchRegistryMapper;
 import it.woodcast.resources.BatchRegistry;
 import it.woodcast.services.BatchRegistryServices;
@@ -50,6 +51,11 @@ public class BatchRegistryFacade extends BaseFacade{
 
         BatchRegistryEntity  batchRegistryEntity= modelMapper.map(batchRegistry,BatchRegistryEntity.class);
         batchRegistryEntity.setCustomer(customerEntity);
+        List<UserEntity> userEntities =new ArrayList<>();
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(Integer.parseInt(batchRegistryEntity.getPm()));
+        userEntities.add(userEntity);
+        batchRegistryEntity.setUser(userEntities);
         batchRegistryServices.save(batchRegistryEntity);
     }
 

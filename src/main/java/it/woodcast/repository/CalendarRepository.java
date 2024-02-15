@@ -20,4 +20,7 @@ public interface CalendarRepository extends JpaRepository<CalendarEntity, Intege
     @Modifying
     @Query("DELETE FROM CalendarEntity ce where ce.customerServiceEntities.id = :id")
     void deleteAllByCustomer(@Param("id") Integer id);
+
+    @Query("select ce FROM CalendarEntity ce where ce.customerServiceEntities.id in :id")
+    List<CalendarEntity> findByBatch(List<Integer> id);
 }

@@ -17,8 +17,8 @@ public class BaseFacade {
     public JwtUser getJwtUser() {
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        String headerValue = request.getHeader("Authorization");
-        System.out.println("Header value: " + headerValue);
+        String headerValue = "eyJhbGciOiJIUzUxMiJ9.eyJzdXJuYW1lIjoiRnJhc2NhIiwibmFtZSI6Ik1pY2hlbGEiLCJydWxlcyI6WyJQUkFDVElDRV9MRUFERVIiXSwidXNlcklEIjo0LCJ1c2VybmFtZSI6Im1pY2hlbGEuZnJhc2NhIiwiaWF0IjoxNzA3OTE3NjY0LCJleHAiOjE3MDgwMDQwNjR9.R6GXF5ZLWF9TZ-Wi59dyfl1tfHgeGE-2lDRbbmIvg3P-xOfeI0eqLT9ZdU0i64JlHT7px3wyAWJXLeyq02dfIw";
+        /*request.getHeader("Authorization");*/
         return jwtTokenProvider.parseToken(headerValue);
     }
 

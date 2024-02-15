@@ -1,7 +1,10 @@
 package it.woodcast.controller;
 
+import it.woodcast.enumeration.RulesEnum;
 import it.woodcast.logic.LoginFacade;
+import it.woodcast.logic.UserFacade;
 import it.woodcast.resources.BatchRegistry;
+import it.woodcast.resources.Customer;
 import it.woodcast.resources.UserResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private LoginFacade loginFacade;
+    @Autowired
+    private UserFacade userFacade;
 
     @PostMapping("/login")
     public ResponseEntity<UserResource> login(@RequestBody UserResource userResource) {
@@ -24,5 +29,10 @@ public class UserController {
     @PostMapping("/")
     public ResponseEntity<UserResource> save(@RequestBody UserResource userResource) {
         return ResponseEntity.ok(loginFacade.save(userResource));
+    }
+
+    @GetMapping("/rule/{rules}")
+    public ResponseEntity<List<UserResource>> findAllByRules(@PathVariable RulesEnum rules) {
+        return ResponseEntity.ok(userFacade.findAllByRules(rules));
     }
 }

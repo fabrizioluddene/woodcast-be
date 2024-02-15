@@ -23,7 +23,6 @@ public class ForecastController {
     @Autowired
     private CalendarFacade calendarFacade;
 
-
     @GetMapping("/{customerId}")
     public ResponseEntity<List<CalendarPivotResource>> findAllBatchRegistry(@RequestHeader String authorization,@PathVariable String customerId,@RequestParam(value = "batchRegistryId",required = false) String batchRegistryId) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 
@@ -43,13 +42,8 @@ public class ForecastController {
     public ResponseEntity<List<CalendarResurce>> create(@RequestHeader String authorization,@RequestBody CalendarResurce calendarResurce) {
         return ResponseEntity.ok(calendarFacade.createAll(calendarResurce));
     }
-
     @PostMapping("/save")
     public ResponseEntity<CalendarResurce> save(@RequestHeader String authorization,@RequestBody CalendarSaveResurce calendarResurce) {
         return ResponseEntity.ok(calendarFacade.save(calendarResurce));
     }
-
-
-
-
 }

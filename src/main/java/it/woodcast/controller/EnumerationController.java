@@ -17,11 +17,11 @@ public class EnumerationController {
     @Autowired
     EnumerationRepository enumerationRepository;
     @GetMapping("/")
-    public ResponseEntity<List<RulesEntity>> findall(@RequestHeader String authorization) {
+    public ResponseEntity<List<RulesEntity>> findall() {
         return ResponseEntity.ok(enumerationRepository.findAll());
     }
     @PostMapping("/")
-    public ResponseEntity<RulesEntity> save(@RequestHeader String authorization,@RequestBody RulesEntity resource) {
+    public ResponseEntity<RulesEntity> save(@RequestBody RulesEntity resource) {
         return ResponseEntity.ok(enumerationRepository.save(resource));
     }
 }

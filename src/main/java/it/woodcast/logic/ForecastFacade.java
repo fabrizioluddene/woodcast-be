@@ -13,6 +13,7 @@ import it.woodcast.services.CustomerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.xml.crypto.Data;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -43,67 +44,71 @@ public class ForecastFacade extends BaseFacade {
 
         List<BatchRegistryEntity> batchRegistryEntities = getBatchRegistryEntities(id, batchRegistriId);
 
-        Map<String, CalendarPivotDashbordResource> pivotMap = new HashMap<>();
+        Map<String, Pivot> pivotMap= new HashMap<>();
+        List<Integer> ids= new ArrayList<>();
+
         batchRegistryEntities.stream().forEach(batchRegistryEntity -> {
+            ids.add(batchRegistryEntity.getId());
 
-            List<CalendarEntity> calendarEntities = calendarRepository.getByCustomerServiceEntitiesOrderByMonth(batchRegistryEntity);
-            String batchRegistryName = batchRegistryEntity.getOrder();
-
-            BigDecimal proceeds = batchRegistryEntity.getExpectedMargin();
-            String dataToCheck ="";
-            Pivot pivot1 = new Pivot();
-            for (CalendarEntity calendarEntity : calendarEntities) {
-
-                String data = dateToString(calendarEntity.getMonth());
-
-                if(!data.equals(dataToCheck)){
-                    pivot1 = new Pivot();
-                }
-                dataToCheck=data;
-
-                BigDecimal rate = calendarEntity.getResourceEntities().getRateParamEntity().getRate();
-                BigDecimal numeroGiorni = calendarEntity.getWorkingDay();
-                CalendarPivotDashbordResource pivotData = pivotMap.computeIfAbsent(batchRegistryName, k -> new CalendarPivotDashbordResource());
-                pivotData.setOrder(batchRegistryName);
-                Map<String, Pivot> pivot = pivotData.getPivot();
-                pivot1.setWorkingDay(pivot1.getWorkingDay().add( numeroGiorni));
-                BigDecimal calculatedCost = rate.multiply(numeroGiorni).setScale(2, RoundingMode.HALF_UP);
-                pivot1.setCalculatedCost(pivot1.getCalculatedCost().add(calculatedCost));
-                BigDecimal calculatedPerceed = ZERO;
-                if (ZERO.compareTo(calculatedCost) != 0) {
-                    calculatedPerceed = calculatedCost.divide(U.subtract(proceeds).divide(U), 2, RoundingMode.HALF_UP);
-                }
-                pivot1.setCalculatedProceeds(pivot1.getCalculatedProceeds().add( calculatedPerceed));
-                pivot.put(data, pivot1);
+        });
+        List<CalendarEntity> calendarEntities = calendarRepository.findByBatch(ids);
+        for (CalendarEntity calendarEntity : calendarEntities) {
+            BigDecimal numeroGiorni = calendarEntity.getWorkingDay();
+            BigDecimal proceeds = calendarEntity.getCustomerServiceEntities().getExpectedMargin();
+            BigDecimal rate = calendarEntity.getResourceEntities().getRateParamEntity().getRate();
+            Pivot pivot = pivotMap.computeIfAbsent(dateToString(calendarEntity.getMonth()),k-> new Pivot());
+            BigDecimal calculatedCost = rate.multiply(numeroGiorni).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal calculatedPerceed = ZERO;
+            if (ZERO.compareTo(calculatedCost) != 0) {
+                calculatedPerceed = calculatedCost.divide(U.subtract(proceeds).divide(U), 2, RoundingMode.HALF_UP);
             }
-        });
-        List<CalendarPivotDashbordResource> calendarPivotDashbordResources = new ArrayList<>(pivotMap.values());
-        List<CalendarGraphDashbordResource> graphDashbordResources = new ArrayList<>();
-        calendarPivotDashbordResources.stream().forEach(r->{
+            pivot.setCalculatedProceeds(pivot.getCalculatedProceeds().add(calculatedPerceed));
+            pivot.setCalculatedCost(pivot.getCalculatedCost().add(calculatedCost));
+
+        }
+
+        List<CalendarGraphDashbordResource> calendarGraphDashbordResource = new ArrayList<>();
+
+        CalendarGraphDashbordResource calendarGraphDashbordResourceProceeds =  new CalendarGraphDashbordResource();
+        List<BigDecimal> value = new ArrayList<>();
+        value.add(pivotMap.get("gennaio").getCalculatedProceeds());
+        value.add(pivotMap.get("febbraio").getCalculatedProceeds());
+        value.add(pivotMap.get("marzo").getCalculatedProceeds());
+        value.add(pivotMap.get("aprile").getCalculatedProceeds());
+        value.add(pivotMap.get("maggio").getCalculatedProceeds());
+        value.add(pivotMap.get("giugno").getCalculatedProceeds());
+        value.add(pivotMap.get("luglio").getCalculatedProceeds());
+        value.add(pivotMap.get("agosto").getCalculatedProceeds());
+        value.add(pivotMap.get("settembre").getCalculatedProceeds());
+        value.add(pivotMap.get("ottobbre").getCalculatedProceeds());
+        value.add(pivotMap.get("novembre").getCalculatedProceeds());
+        value.add(pivotMap.get("dicembre").getCalculatedProceeds());
+
+        calendarGraphDashbordResourceProceeds.setData(value);
+        calendarGraphDashbordResourceProceeds.setName("Ricavi");
+        calendarGraphDashbordResource.add(calendarGraphDashbordResourceProceeds);
+
+        CalendarGraphDashbordResource calendarGraphDashbordResourceCost =  new CalendarGraphDashbordResource();
+        List<BigDecimal> valueCost = new ArrayList<>();
+        valueCost.add(pivotMap.get("gennaio").getCalculatedCost());
+        valueCost.add(pivotMap.get("febbraio").getCalculatedCost());
+        valueCost.add(pivotMap.get("marzo").getCalculatedCost());
+        valueCost.add(pivotMap.get("aprile").getCalculatedCost());
+        valueCost.add(pivotMap.get("maggio").getCalculatedCost());
+        valueCost.add(pivotMap.get("giugno").getCalculatedCost());
+        valueCost.add(pivotMap.get("luglio").getCalculatedCost());
+        valueCost.add(pivotMap.get("agosto").getCalculatedCost());
+        valueCost.add(pivotMap.get("settembre").getCalculatedCost());
+        valueCost.add(pivotMap.get("ottobbre").getCalculatedCost());
+        valueCost.add(pivotMap.get("novembre").getCalculatedCost());
+        valueCost.add(pivotMap.get("dicembre").getCalculatedCost());
+
+        calendarGraphDashbordResourceCost.setData(valueCost);
+        calendarGraphDashbordResourceCost.setName("Costi");
+        calendarGraphDashbordResource.add(calendarGraphDashbordResourceCost);
 
 
-            CalendarGraphDashbordResource calendarGraphDashbordResource = new CalendarGraphDashbordResource();
-            calendarGraphDashbordResource.setName(r.getOrder());
-            List<BigDecimal> value = new ArrayList<>();
-            value.add(r.getPivot().get("gennaio").getCalculatedProceeds());
-            value.add(r.getPivot().get("febbraio").getCalculatedProceeds());
-            value.add(r.getPivot().get("marzo").getCalculatedProceeds());
-            value.add(r.getPivot().get("aprile").getCalculatedProceeds());
-            value.add(r.getPivot().get("maggio").getCalculatedProceeds());
-            value.add(r.getPivot().get("giugno").getCalculatedProceeds());
-            value.add(r.getPivot().get("luglio").getCalculatedProceeds());
-            value.add(r.getPivot().get("agosto").getCalculatedProceeds());
-            value.add(r.getPivot().get("settembre").getCalculatedProceeds());
-            value.add(r.getPivot().get("ottobbre").getCalculatedProceeds());
-            value.add(r.getPivot().get("novembre").getCalculatedProceeds());
-            value.add(r.getPivot().get("dicembre").getCalculatedProceeds());
-            calendarGraphDashbordResource.setData(value);
-            graphDashbordResources.add(calendarGraphDashbordResource);
-
-
-        });
-
-        return graphDashbordResources;
+        return calendarGraphDashbordResource;
     }
 
     public List<CalendarPivotResource> getAllCustomerBatchRegistry(String id, String batchRegistriId)  {

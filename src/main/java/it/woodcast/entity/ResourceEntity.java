@@ -28,6 +28,14 @@ public class ResourceEntity {
     @Column(name = "r_number")
     private String number;
 
+    @Column(name = "r_cdc")
+    private String cdc;
+
+    @Column(name = "r_email")
+    private String email;
+    @Column(name = "r_fiscal_code")
+    private String fiscalCode;
+
     @ManyToOne
     @JoinColumn(name = "r_rate_param_id", referencedColumnName = "rrp_id")
     private RateParamEntity rateParamEntity;
