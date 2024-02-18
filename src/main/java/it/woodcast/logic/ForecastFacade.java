@@ -2,9 +2,11 @@ package it.woodcast.logic;
 
 import it.woodcast.entity.BatchRegistryEntity;
 import it.woodcast.entity.CalendarEntity;
+import it.woodcast.entity.WorkingCalendarEntity;
 import it.woodcast.enumeration.RulesEnum;
 import it.woodcast.mapper.BatchRegistryMapper;
 import it.woodcast.repository.CalendarRepository;
+import it.woodcast.repository.WorkingCalendarRepository;
 import it.woodcast.resources.*;
 import it.woodcast.resources.dashboard.graph.CalendarGraphDashbordResource;
 import it.woodcast.services.BatchRegistryServices;
@@ -32,12 +34,16 @@ public class ForecastFacade extends BaseFacade {
     @Autowired
     private BatchRegistryMapper batchRegistryMapper;
 
+    @Autowired
+    WorkingCalendarRepository workingCalendarRepository;
 
 
     @Autowired
     private CalendarRepository calendarRepository;
     private static final BigDecimal ZERO = BigDecimal.ZERO;
     private static final BigDecimal U = BigDecimal.valueOf(100);
+
+
 
 
     public List<CalendarGraphDashbordResource>  getAllCustomerBatchRegistryDashboard(String id, String batchRegistriId)  {
@@ -71,18 +77,20 @@ public class ForecastFacade extends BaseFacade {
 
         CalendarGraphDashbordResource calendarGraphDashbordResourceProceeds =  new CalendarGraphDashbordResource();
         List<BigDecimal> value = new ArrayList<>();
-        value.add(pivotMap.get("gennaio").getCalculatedProceeds());
-        value.add(pivotMap.get("febbraio").getCalculatedProceeds());
-        value.add(pivotMap.get("marzo").getCalculatedProceeds());
-        value.add(pivotMap.get("aprile").getCalculatedProceeds());
-        value.add(pivotMap.get("maggio").getCalculatedProceeds());
-        value.add(pivotMap.get("giugno").getCalculatedProceeds());
-        value.add(pivotMap.get("luglio").getCalculatedProceeds());
-        value.add(pivotMap.get("agosto").getCalculatedProceeds());
-        value.add(pivotMap.get("settembre").getCalculatedProceeds());
-        value.add(pivotMap.get("ottobbre").getCalculatedProceeds());
-        value.add(pivotMap.get("novembre").getCalculatedProceeds());
-        value.add(pivotMap.get("dicembre").getCalculatedProceeds());
+        if (pivotMap.size() !=0) {
+            value.add(pivotMap.get("gennaio").getCalculatedProceeds());
+            value.add(pivotMap.get("febbraio").getCalculatedProceeds());
+            value.add(pivotMap.get("marzo").getCalculatedProceeds());
+            value.add(pivotMap.get("aprile").getCalculatedProceeds());
+            value.add(pivotMap.get("maggio").getCalculatedProceeds());
+            value.add(pivotMap.get("giugno").getCalculatedProceeds());
+            value.add(pivotMap.get("luglio").getCalculatedProceeds());
+            value.add(pivotMap.get("agosto").getCalculatedProceeds());
+            value.add(pivotMap.get("settembre").getCalculatedProceeds());
+            value.add(pivotMap.get("ottobbre").getCalculatedProceeds());
+            value.add(pivotMap.get("novembre").getCalculatedProceeds());
+            value.add(pivotMap.get("dicembre").getCalculatedProceeds());
+        }
 
         calendarGraphDashbordResourceProceeds.setData(value);
         calendarGraphDashbordResourceProceeds.setName("Ricavi");
@@ -90,19 +98,20 @@ public class ForecastFacade extends BaseFacade {
 
         CalendarGraphDashbordResource calendarGraphDashbordResourceCost =  new CalendarGraphDashbordResource();
         List<BigDecimal> valueCost = new ArrayList<>();
-        valueCost.add(pivotMap.get("gennaio").getCalculatedCost());
-        valueCost.add(pivotMap.get("febbraio").getCalculatedCost());
-        valueCost.add(pivotMap.get("marzo").getCalculatedCost());
-        valueCost.add(pivotMap.get("aprile").getCalculatedCost());
-        valueCost.add(pivotMap.get("maggio").getCalculatedCost());
-        valueCost.add(pivotMap.get("giugno").getCalculatedCost());
-        valueCost.add(pivotMap.get("luglio").getCalculatedCost());
-        valueCost.add(pivotMap.get("agosto").getCalculatedCost());
-        valueCost.add(pivotMap.get("settembre").getCalculatedCost());
-        valueCost.add(pivotMap.get("ottobbre").getCalculatedCost());
-        valueCost.add(pivotMap.get("novembre").getCalculatedCost());
-        valueCost.add(pivotMap.get("dicembre").getCalculatedCost());
-
+        if (pivotMap.size() !=0) {
+            valueCost.add(pivotMap.get("gennaio").getCalculatedCost());
+            valueCost.add(pivotMap.get("febbraio").getCalculatedCost());
+            valueCost.add(pivotMap.get("marzo").getCalculatedCost());
+            valueCost.add(pivotMap.get("aprile").getCalculatedCost());
+            valueCost.add(pivotMap.get("maggio").getCalculatedCost());
+            valueCost.add(pivotMap.get("giugno").getCalculatedCost());
+            valueCost.add(pivotMap.get("luglio").getCalculatedCost());
+            valueCost.add(pivotMap.get("agosto").getCalculatedCost());
+            valueCost.add(pivotMap.get("settembre").getCalculatedCost());
+            valueCost.add(pivotMap.get("ottobbre").getCalculatedCost());
+            valueCost.add(pivotMap.get("novembre").getCalculatedCost());
+            valueCost.add(pivotMap.get("dicembre").getCalculatedCost());
+        }
         calendarGraphDashbordResourceCost.setData(valueCost);
         calendarGraphDashbordResourceCost.setName("Costi");
         calendarGraphDashbordResource.add(calendarGraphDashbordResourceCost);
@@ -114,7 +123,7 @@ public class ForecastFacade extends BaseFacade {
     public List<CalendarPivotResource> getAllCustomerBatchRegistry(String id, String batchRegistriId)  {
 
         List<BatchRegistryEntity> batchRegistryEntities = getBatchRegistryEntities(id, batchRegistriId);
-
+        WorkingCalendarEntity workingCalendarEntity= workingCalendarRepository.findByYear(new BigDecimal(2024));
         Map<String, CalendarPivotResource> pivotMap = new HashMap<>();
         batchRegistryEntities.stream().forEach(batchRegistryEntity -> {
 
@@ -218,6 +227,44 @@ public class ForecastFacade extends BaseFacade {
         }
         return StoplightEnum.GREEN;
     }
+
+    private BigDecimal getWorkableDays(WorkingCalendarEntity workingCalendarEntity,Date data){
+        SimpleDateFormat sdf = new SimpleDateFormat("MM");
+        String dataString = sdf.format(data);
+
+        BigDecimal workableDays = BigDecimal.ZERO;
+        switch (dataString) {
+            case "01":
+                return workingCalendarEntity.getJanuary();
+
+            case "02":
+                return workingCalendarEntity.getFebruary();
+            case "03":
+                return workingCalendarEntity.getMarch();
+            case "04":
+                return workingCalendarEntity.getApril();
+            case "05":
+                return workingCalendarEntity.getMay();
+            case "06":
+                return workingCalendarEntity.getJune();
+            case "07":
+                return workingCalendarEntity.getJuly();
+            case "08":
+                return workingCalendarEntity.getAugust();
+            case "09":
+                return workingCalendarEntity.getSeptember();
+            case "10":
+                return workingCalendarEntity.getOctober();
+            case "11":
+                return workingCalendarEntity.getNovember();
+            case "12":
+                return workingCalendarEntity.getDecember();
+            default:
+                return BigDecimal.ZERO;
+        }
+
+    }
+
 
     private String dateToString(Date data) {
         Map<String, String> stringStringMap = new HashMap<>();

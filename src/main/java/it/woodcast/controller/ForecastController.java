@@ -24,26 +24,26 @@ public class ForecastController {
     private CalendarFacade calendarFacade;
 
     @GetMapping("/{customerId}")
-    public ResponseEntity<List<CalendarPivotResource>> findAllBatchRegistry(@RequestHeader String authorization,@PathVariable String customerId,@RequestParam(value = "batchRegistryId",required = false) String batchRegistryId) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public ResponseEntity<List<CalendarPivotResource>> findAllBatchRegistry(@PathVariable String customerId,@RequestParam(value = "batchRegistryId",required = false) String batchRegistryId) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 
         return ResponseEntity.ok(customerFacade.getAllCustomerBatchRegistry(customerId,batchRegistryId));
     }
     @GetMapping("/costi-ricavi/{customerId}")
-    public ResponseEntity<RevenuesCostsResource> calculate(@RequestHeader String authorization,@PathVariable String customerId, @RequestParam(value ="batchRegistryId",required = false) String batchRegistryId) {
+    public ResponseEntity<RevenuesCostsResource> calculate(@PathVariable String customerId, String batchRegistryId) {
 
         return ResponseEntity.ok(customerFacade.calculate(customerId,batchRegistryId));
     }
     @GetMapping("dashboard/{customerId}")
-    public ResponseEntity<List<CalendarGraphDashbordResource>> findAllBatchRegistryDasboard(@RequestHeader(value = "Authorization" ,required = false) String authorization, @PathVariable String customerId, @RequestParam(value = "batchRegistryId",required = false) String batchRegistryId) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public ResponseEntity<List<CalendarGraphDashbordResource>> findAllBatchRegistryDasboard( String authorization, @PathVariable String customerId, @RequestParam(value = "batchRegistryId",required = false) String batchRegistryId) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 
         return ResponseEntity.ok(customerFacade.getAllCustomerBatchRegistryDashboard(customerId,batchRegistryId));
     }
     @PostMapping("/create")
-    public ResponseEntity<List<CalendarResurce>> create(@RequestHeader String authorization,@RequestBody CalendarResurce calendarResurce) {
+    public ResponseEntity<List<CalendarResurce>> create(@RequestBody CalendarResurce calendarResurce) {
         return ResponseEntity.ok(calendarFacade.createAll(calendarResurce));
     }
     @PostMapping("/save")
-    public ResponseEntity<CalendarResurce> save(@RequestHeader String authorization,@RequestBody CalendarSaveResurce calendarResurce) {
+    public ResponseEntity<CalendarResurce> save(@RequestBody CalendarSaveResurce calendarResurce) {
         return ResponseEntity.ok(calendarFacade.save(calendarResurce));
     }
 }

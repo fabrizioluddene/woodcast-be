@@ -28,9 +28,12 @@ class WoodCastApplicationTests {
     @Autowired
     RateParmaServices rateParmaServices;
 
+    @Autowired
+    WorkingCalendarRepository calendarRepository;
+
     @Test
     void contextLoads() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
+        /*ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         // Carica il file JSON dalla cartella delle risorse
@@ -51,7 +54,8 @@ class WoodCastApplicationTests {
 
         }
         System.out.println("");
-        userRepository.saveAll(resourceEntities);
+        userRepository.saveAll(resourceEntities);*/
+        calendarRepository.findAll();
     }
 
 }

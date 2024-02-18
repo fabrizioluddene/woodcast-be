@@ -12,178 +12,63 @@ INSERT INTO resources_rate_param (rrp_id, rrp_rate, rrp_grade) VALUES(24, 290.00
 INSERT INTO resources_rate_param (rrp_id, rrp_rate, rrp_grade) VALUES(25, 285.00, '3Parte C');
 INSERT INTO resources_rate_param (rrp_id, rrp_rate, rrp_grade) VALUES(26, 1200.00, 'C');
 INSERT INTO resources_rate_param (rrp_id, rrp_rate, rrp_grade) VALUES(27, 290.00, '3Parte D');
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(1, 1, 'AM Anagrafe', 'Reactive', 'MARREDDU FRANCESCA', '');
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(2, 1, 'Cross', 'Reactive', 'GIARETTO LUCA', '');
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(3, 1, 'Progetti host anagrafe', 'REACTIVE', 'AINI MARIO', '');
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(4, 1, 'Cross', 'REACTIVE', 'BARSANTI STEFANO', '');
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(5, 24, 'Progetti host anagrafe', 'KYREY', 'MIRABELLI LUIGI', '');
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(6, 1, 'AM Anagrafe e Sportello', 'REACTIVE', 'BARTOLINI STEFANO', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(7, 16, 'AM Anagrafe e Sportello', 'REACTIVE', 'CALABRESE PAOLO', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(8, 1, 'Progetti host anagrafe', 'REACTIVE', 'CAMMI FILIPPO', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(9, 1, 'Progetti dipartimentale anagrafe', 'REACTIVE', 'COLATOSTI VALENTINO', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(10, 17, 'CdC Anagrafe', 'REACTIVE', 'DE CARLI RAIMONDA', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(11, 1, 'Progetti host anagrafe', 'REACTIVE', 'DI NUNZIO ELISA', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(12, 18, 'Cross', 'REACTIVE', 'FRASCA MICHELA', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(13, 20, 'Progetti dipartimentale anagrafe', 'REACTIVE', 'FRATTINI ALESSANDRO', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(14, 16, 'Progetti dipartimentale anagrafe', 'REACTIVE', 'FURLAN VALENTINO', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(15, 20, 'Progetti host anagrafe', 'REACTIVE', 'IAGHER LEANDRO', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(16, 1, 'Progetti dipartimentale sportello', 'REACTIVE', 'MINNITI GIUSEPPE', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(17, 16, 'Progetti dipartimentale sportello', 'REACTIVE', 'MOSCHINI SEBASTIANO', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(18, 21, 'Progetti dipartimentale anagrafe', 'REACTIVE', 'ORTU STEFANO', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(19, 1, 'Supporto dipartimentale', 'REACTIVE', 'RUSSO GIUSEPPE ERNESTO', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(20, 16, 'AM Anagrafe', 'REACTIVE', 'SCOGNAMIGLIO CIRA', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(21, 1, 'AM Anagrafe', 'REACTIVE', 'SCOTTI TERESA', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(22, 1, 'Cross', 'REACTIVE', 'SOTTANA BARBARA', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(23, 1, 'Progetti host anagrafe', 'REACTIVE', 'TONON MARTINA', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(24, 1, 'Progetti dipartimentale anagrafe', 'REACTIVE', 'JAN MAIN MUHAMMAD FAHEEM', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(25, 22, 'Progetti dipartimentale anagrafe', 'Advancia Technology srl', 'MARCHESIELLO GIUSEPPE', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(26, 22, 'Progetti dipartimentale anagrafe', 'Advancia Technology srl', 'RUSSO GABRIEL', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(27, 23, 'Progetti dipartimentale anagrafe', 'TEHELAB', 'COZZOLINO PIPICELLI PAOLO', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(28, 25, 'Progetti host sportello', 'KYREY', 'ZAMBON FABRIZIO', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(29, 17, 'Cross', 'REACTIVE', 'RISORSA A1', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(30, 1, 'Cross', 'REACTIVE', 'RISORSA B3', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(31, 16, 'Cross', 'REACTIVE', 'RISORSA B2', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(32, 26, 'Cross', 'REACTIVE', 'REPERIBILITA B3', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(33, 24, 'Progetti host anagrafe', 'KYREY', 'REPERIBILITA MIRABELLI', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(34, 1, 'Cross', 'REACTIVE', 'PLAFOND B3', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(35, 16, 'Cross', 'REACTIVE', 'PLAFOND B2', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(36, 1, 'Cross', 'REACTIVE', 'TBD Ricavo B3', NULL);
-INSERT INTO resources (r_id, r_rate_param_id, r_area, r_company, r_nominative, r_number) VALUES(37, 22, 'Progetti dipartimentale sportello', 'Advancia Technology srl', 'ADVANCIA', NULL);
 INSERT INTO customer (c_id, c_customer_name) VALUES(1, 'Bper nuovo');
 INSERT INTO customer (c_id, c_customer_name) VALUES(2, 'Intesa San Paolo');
-INSERT INTO customer_serivce (cs_id, cs_rate, customer_c_id, cs_service_name) VALUES(1, 330.00, 1, 'AMAN - Canone manutenzione Anagrafe');
-INSERT INTO customer_serivce (cs_id, cs_rate, customer_c_id, cs_service_name) VALUES(4, 330.00, 1, 'RTF2 - Sportello evolutive WIDE');
-INSERT INTO batch_registry (br_client_service_id, br_days_remaining, br_id, br_order_status, br_order_type, br_proceeds, br_proceeds_day_plafond, br_description, br_note, br_order, br_pm, br_expected_margin) VALUES(1, 0.00, 4, 'A', 'R', 216000.00, 200.00, 'AMAN - Canone manutenzione Anagrafe', 'Residui AN', '23E-C21092.AMAN', 'Giaretto', 8.00);
-INSERT INTO batch_registry (br_client_service_id, br_days_remaining, br_id, br_order_status, br_order_type, br_proceeds, br_proceeds_day_plafond, br_description, br_note, br_order, br_pm, br_expected_margin) VALUES(4, 0.00, 5, 'A', 'R', 651.42, 0.00, 'RTF2 - Sportello evolutive WIDE', 'no', '23E-C21475.RTF2', 'Giaretto', 20.00);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(173, '2024-01-01', 1.00, 1, 32);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(174, '2024-02-01', 1.00, 1, 32);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(175, '2024-03-01', 1.00, 1, 32);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(176, '2024-04-01', 1.00, 1, 32);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(177, '2024-05-01', 1.00, 1, 32);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(178, '2024-06-01', 1.00, 1, 32);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(179, '2024-07-01', 1.00, 1, 32);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(180, '2024-08-01', 1.00, 1, 32);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(181, '2024-09-01', 1.00, 1, 32);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(182, '2024-10-01', 1.00, 1, 32);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(183, '2024-11-01', 1.00, 1, 32);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(184, '2024-12-01', 1.00, 1, 32);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(185, '2024-01-01', 11.00, 1, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(186, '2024-02-01', 11.00, 1, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(187, '2024-03-01', 11.00, 1, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(188, '2024-04-01', 11.00, 1, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(189, '2024-05-01', 11.00, 1, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(190, '2024-06-01', 11.00, 1, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(191, '2024-07-01', 11.00, 1, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(192, '2024-08-01', 11.00, 1, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(193, '2024-09-01', 11.00, 1, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(194, '2024-10-01', 11.00, 1, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(195, '2024-11-01', 11.00, 1, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(196, '2024-12-01', 10.40, 1, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(197, '2024-01-01', 11.00, 1, 1);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(198, '2024-02-01', 11.00, 1, 1);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(199, '2024-03-01', 11.00, 1, 1);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(200, '2024-04-01', 11.00, 1, 1);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(201, '2024-05-01', 11.00, 1, 1);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(202, '2024-06-01', 11.00, 1, 1);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(203, '2024-07-01', 11.00, 1, 1);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(204, '2024-08-01', 11.00, 1, 1);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(205, '2024-09-01', 11.00, 1, 1);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(206, '2024-10-01', 11.00, 1, 1);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(207, '2024-11-01', 11.00, 1, 1);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(208, '2024-12-01', 11.00, 1, 1);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(209, '2024-01-01', 11.00, 1, 15);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(210, '2024-02-01', 11.00, 1, 15);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(211, '2024-03-01', 11.00, 1, 15);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(212, '2024-04-01', 11.00, 1, 15);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(213, '2024-05-01', 11.00, 1, 15);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(214, '2024-06-01', 11.00, 1, 15);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(215, '2024-07-01', 11.00, 1, 15);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(216, '2024-08-01', 11.00, 1, 15);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(217, '2024-09-01', 11.00, 1, 15);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(218, '2024-10-01', 11.00, 1, 15);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(219, '2024-11-01', 11.00, 1, 15);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(220, '2024-12-01', 11.00, 1, 15);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(221, '2024-01-01', 1.00, 1, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(222, '2024-02-01', 1.00, 1, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(223, '2024-03-01', 1.00, 1, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(224, '2024-04-01', 1.00, 1, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(225, '2024-05-01', 1.00, 1, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(226, '2024-06-01', 1.00, 1, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(227, '2024-07-01', 1.00, 1, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(228, '2024-08-01', 1.00, 1, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(229, '2024-09-01', 1.00, 1, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(230, '2024-10-01', 1.00, 1, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(231, '2024-11-01', 1.00, 1, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(232, '2024-12-01', 1.00, 1, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(233, '2024-01-01', 100.00, 1, 34);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(234, '2024-02-01', 0.00, 1, 34);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(235, '2024-03-01', 0.00, 1, 34);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(236, '2024-04-01', 0.00, 1, 34);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(237, '2024-05-01', 24.00, 1, 34);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(238, '2024-06-01', 24.00, 1, 34);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(239, '2024-07-01', 24.00, 1, 34);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(240, '2024-08-01', 15.00, 1, 34);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(241, '2024-09-01', 24.00, 1, 34);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(242, '2024-10-01', 24.00, 1, 34);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(243, '2024-11-01', 23.00, 1, 34);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(244, '2024-12-01', 22.00, 1, 34);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(246, '2024-01-01', 15.00, 4, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(247, '2024-02-01', 0.00, 4, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(248, '2024-03-01', 0.00, 4, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(249, '2024-04-01', 0.00, 4, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(250, '2024-05-01', 0.00, 4, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(251, '2024-06-01', 0.00, 4, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(252, '2024-07-01', 0.00, 4, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(253, '2024-08-01', 0.00, 4, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(254, '2024-09-01', 0.00, 4, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(255, '2024-10-01', 0.00, 4, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(256, '2024-11-01', 0.00, 4, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(257, '2024-12-01', 0.00, 4, 20);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(258, '2024-01-01', 0.00, 4, 16);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(259, '2024-02-01', 0.00, 4, 16);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(260, '2024-03-01', 0.00, 4, 16);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(261, '2024-04-01', 0.00, 4, 16);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(262, '2024-05-01', 0.00, 4, 16);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(263, '2024-06-01', 0.00, 4, 16);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(264, '2024-07-01', 0.00, 4, 16);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(265, '2024-08-01', 0.00, 4, 16);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(266, '2024-09-01', 0.00, 4, 16);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(267, '2024-10-01', 0.00, 4, 16);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(268, '2024-11-01', 0.00, 4, 16);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(269, '2024-12-01', 0.00, 4, 16);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(270, '2024-01-01', 0.00, 4, 23);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(271, '2024-02-01', 0.00, 4, 23);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(272, '2024-03-01', 0.00, 4, 23);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(273, '2024-04-01', 0.00, 4, 23);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(274, '2024-05-01', 0.00, 4, 23);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(275, '2024-06-01', 0.00, 4, 23);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(276, '2024-07-01', 0.00, 4, 23);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(277, '2024-08-01', 0.00, 4, 23);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(278, '2024-09-01', 0.00, 4, 23);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(279, '2024-10-01', 0.00, 4, 23);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(280, '2024-11-01', 0.00, 4, 23);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(281, '2024-12-01', 0.00, 4, 23);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(282, '2024-01-01', 15.00, 4, 8);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(283, '2024-02-01', 15.00, 4, 8);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(284, '2024-03-01', 15.00, 4, 8);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(285, '2024-04-01', 15.00, 4, 8);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(286, '2024-05-01', 15.00, 4, 8);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(287, '2024-06-01', 0.00, 4, 8);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(288, '2024-07-01', 0.00, 4, 8);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(289, '2024-08-01', 0.00, 4, 8);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(290, '2024-09-01', 0.00, 4, 8);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(291, '2024-10-01', 0.00, 4, 8);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(292, '2024-11-01', 0.00, 4, 8);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(293, '2024-12-01', 0.00, 4, 8);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(294, '2024-01-01', 0.00, 4, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(295, '2024-02-01', 0.00, 4, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(296, '2024-03-01', 0.00, 4, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(297, '2024-04-01', 0.00, 4, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(298, '2024-05-01', 0.00, 4, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(299, '2024-06-01', 0.00, 4, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(300, '2024-07-01', 0.00, 4, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(301, '2024-08-01', 0.00, 4, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(302, '2024-09-01', 0.00, 4, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(303, '2024-10-01', 0.00, 4, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(304, '2024-11-01', 0.00, 4, 2);
-INSERT INTO calendar (c_id, month, working_day, customer_service_entities_cs_id, resource_entities_r_id) VALUES(305, '2024-12-01', 0.00, 4, 2);
+
+create or replace view working_calendar as
+SELECT year,
+       SUM(CASE WHEN month = 1 THEN working_days ELSE 0 END) AS january,
+       SUM(CASE WHEN month = 2 THEN working_days ELSE 0 END) AS february,
+       SUM(CASE WHEN month = 3 THEN working_days ELSE 0 END) AS march,
+       SUM(CASE WHEN month = 4 THEN working_days ELSE 0 END) AS april,
+       SUM(CASE WHEN month = 5 THEN working_days ELSE 0 END) AS may,
+       SUM(CASE WHEN month = 6 THEN working_days ELSE 0 END) AS june,
+       SUM(CASE WHEN month = 7 THEN working_days ELSE 0 END) AS july,
+       SUM(CASE WHEN month = 8 THEN working_days ELSE 0 END) AS august,
+       SUM(CASE WHEN month = 9 THEN working_days ELSE 0 END) AS september,
+       SUM(CASE WHEN month = 10 THEN working_days ELSE 0 END) AS october,
+       SUM(CASE WHEN month = 11 THEN working_days ELSE 0 END) AS november,
+       SUM(CASE WHEN month = 12 THEN working_days ELSE 0 END) AS december
+FROM (
+    SELECT EXTRACT(YEAR FROM date) AS year,
+           EXTRACT(MONTH FROM date) AS month,
+           COUNT(*) AS working_days
+    FROM generate_series('2024-01-01'::date, '2050-12-31'::date, '1 day') AS gs(date)
+    WHERE EXTRACT(DOW FROM date) BETWEEN 1 AND 5 -- Dal lunedì al venerdì
+      AND NOT EXISTS (SELECT 1 FROM holiday_calendar WHERE hc_holiday_date = gs.date)
+    GROUP BY EXTRACT(YEAR FROM date), EXTRACT(MONTH FROM date)
+) AS subquery
+GROUP BY year
+ORDER BY year;
+
+
+select
+	resource_name,
+	SUM(case when month = 1 then working_days else 0 end) as january,wc.january as january_wc,
+	SUM(case when month = 2 then working_days else 0 end) as february,wc.february as february_wc,
+	SUM(case when month = 3 then working_days else 0 end) as march,wc.march as march_wc,
+	SUM(case when month = 4 then working_days else 0 end) as april,wc.april as april_wc,
+	SUM(case when month = 5 then working_days else 0 end) as may,wc.may as may_wc,
+	SUM(case when month = 6 then working_days else 0 end) as june,wc.june as june_wc,
+	SUM(case when month = 7 then working_days else 0 end) as july,wc.july as july_wc,
+	SUM(case when month = 8 then working_days else 0 end) as august,wc.august as august_wc,
+	SUM(case when month = 9 then working_days else 0 end) as september,wc.september as september_wc,
+	SUM(case when month = 10 then working_days else 0 end) as october,wc.october as october_wc,
+	SUM(case when month = 11 then working_days else 0 end) as november,wc.november as november_wc,
+	SUM(case when month = 12 then working_days else 0 end) as december,wc.december as december_wc
+from
+	(
+	select
+		r.r_nominative as resource_name,
+		extract(month
+	from
+		month) as month,
+		c.working_day as working_days
+	from
+		calendar c
+	join
+    resources r on
+		c.resource_entities_r_id = r.r_id
+	),working_calendar wc where year =2024
+group by
+	resource_name,wc.january,wc.february,wc.march,wc.april,wc.may,wc.june,wc.july,wc.august,wc.september,wc.october,wc.november,wc.december

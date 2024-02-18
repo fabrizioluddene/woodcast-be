@@ -14,4 +14,5 @@ public class Pivot {
     private BigDecimal calculatedProceeds = BigDecimal.ZERO;
 
 
+
 }
