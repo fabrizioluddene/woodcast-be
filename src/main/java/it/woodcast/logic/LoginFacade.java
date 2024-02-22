@@ -53,8 +53,12 @@ public class LoginFacade extends BaseFacade {
     }
 
     private List<RulesEntity> setRules(UserResource userResource) {
-        return userResource.getRules().stream()
-                .map(rule -> new RulesEntity(rule))
-                .collect(Collectors.toList());
+        if (userResource.getRules()!=null){
+            return userResource.getRules().stream()
+                    .map(rule -> new RulesEntity(rule))
+                    .collect(Collectors.toList());
+        }
+        return new ArrayList<>();
+
     }
 }

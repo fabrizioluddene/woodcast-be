@@ -17,8 +17,8 @@ public class BaseFacade {
     public JwtUser getJwtUser() {
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        String headerValue = "eyJhbGciOiJIUzUxMiJ9.eyJzdXJuYW1lIjoiRnJhc2NhIiwibmFtZSI6Ik1pY2hlbGEiLCJydWxlcyI6WyJQUkFDVElDRV9MRUFERVIiXSwidXNlcklEIjo2LCJ1c2VybmFtZSI6Im1pY2hlbGEuZnJhc2NhIiwiaWF0IjoxNzA4MDEyNDIxLCJleHAiOjE3MDgwOTg4MjF9.anaz6Ug_7virIIVtJcl2uAUL-H9uQkfj4bTFSZSj0oFVoamrN0P9nhEWpUyqYf77-E08wlQujcJSJX7LbPm_LQ";
-        //request.getHeader("Authorization");
+        String headerValue = /*"eyJhbGciOiJIUzUxMiJ9.eyJzdXJuYW1lIjoiRnJhc2NhIiwibmFtZSI6Ik1pY2hlbGEiLCJydWxlcyI6WyJQUkFDVElDRV9MRUFERVIiXSwidXNlcklEIjo2LCJ1c2VybmFtZSI6Im1pY2hlbGEuZnJhc2NhIiwiaWF0IjoxNzA4MDEyNDIxLCJleHAiOjE3MDgwOTg4MjF9.anaz6Ug_7virIIVtJcl2uAUL-H9uQkfj4bTFSZSj0oFVoamrN0P9nhEWpUyqYf77-E08wlQujcJSJX7LbPm_LQ";*/
+        request.getHeader("User-Info-Jwt");
         return jwtTokenProvider.parseToken(headerValue);
     }
 

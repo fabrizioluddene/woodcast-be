@@ -1,9 +1,11 @@
 package it.woodcast.services;
 
-import it.woodcast.entity.BatchRegistryEntity;
 import it.woodcast.entity.ResourceEntity;
-import it.woodcast.repository.BatchRegistryRepository;
+import it.woodcast.entity.ResourceViewEntity;
+import it.woodcast.entity.ResourcesVacationEntity;
 import it.woodcast.repository.ResourceRepository;
+import it.woodcast.repository.ResourceViewRepository;
+import it.woodcast.repository.ResourcesVacationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,13 @@ import java.util.Optional;
 public class ResourceServices {
     @Autowired
     private ResourceRepository resourceRepository;
+
+    @Autowired
+    ResourceViewRepository resourceViewRepository;
+    @Autowired
+    ResourcesVacationRepository resourcesVacationRepository;
+
+
     public List<ResourceEntity> findAll() {
 
 
@@ -35,5 +44,19 @@ public class ResourceServices {
 
         ResourceEntity resourceEntityRet = resourceRepository.save(resourceEntity);
         return resourceEntityRet.getId();
+    }
+
+    public void saveAllVacation(List<ResourcesVacationEntity> resourcesVacationEntities){
+
+        resourcesVacationRepository.saveAll(resourcesVacationEntities);
+    }
+    public void deleteAllVacatio(List<ResourcesVacationEntity> resourcesVacationEntities){
+
+        resourcesVacationRepository.deleteAll(resourcesVacationEntities);
+    }
+
+
+    public List<ResourceViewEntity> findAllResourceView(){
+        return resourceViewRepository.findAll();
     }
 }

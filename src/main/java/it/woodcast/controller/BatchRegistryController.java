@@ -15,19 +15,20 @@ public class BatchRegistryController {
     @Autowired
     private BatchRegistryFacade batchRegistryFacade;
 
+
     @GetMapping("find-all")
-    public ResponseEntity<List<BatchRegistry>> findAll(@RequestHeader String authorization) {
+    public ResponseEntity<List<BatchRegistry>> findAll() {
         return ResponseEntity.ok(batchRegistryFacade.getBatchRegistryResources());
     }
 
     @PostMapping("save")
-    public ResponseEntity<String> save(@RequestHeader String authorization,@RequestBody BatchRegistry batchRegistry) {
+    public ResponseEntity<String> save(@RequestBody BatchRegistry batchRegistry) {
         batchRegistryFacade.save(batchRegistry);
         return ResponseEntity.ok("ok");
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> delete(@RequestHeader String authorization,@PathVariable Integer id) {
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
         batchRegistryFacade.deleteAllByCustomer(id);
         return ResponseEntity.ok().build();
 

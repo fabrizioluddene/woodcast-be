@@ -29,7 +29,7 @@ class WoodCastApplicationTests {
     RateParmaServices rateParmaServices;
 
     @Autowired
-    WorkingCalendarRepository calendarRepository;
+    ResourceViewRepository resourceViewRepository;
 
     @Test
     void contextLoads() throws IOException {
@@ -55,7 +55,8 @@ class WoodCastApplicationTests {
         }
         System.out.println("");
         userRepository.saveAll(resourceEntities);*/
-        calendarRepository.findAll();
+
+        resourceViewRepository.findAll();
     }
 
 }

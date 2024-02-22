@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -19,6 +20,10 @@ public class CalendarService {
     }
     public void deleteAllByCustomer(Integer id){
         calendarRepository.deleteAllByCustomer(id);
+    }
+
+    public List<CalendarEntity> findByMonthAndResouceId(Date month, Integer resourceId){
+      return  calendarRepository.findByMonthAndResouceId(month,resourceId);
     }
 
 

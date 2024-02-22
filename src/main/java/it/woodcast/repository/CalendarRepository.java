@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.List;
 
 @Repository
@@ -23,4 +24,7 @@ public interface CalendarRepository extends JpaRepository<CalendarEntity, Intege
 
     @Query("select ce FROM CalendarEntity ce where ce.customerServiceEntities.id in :id")
     List<CalendarEntity> findByBatch(List<Integer> id);
+
+    @Query("select ce FROM CalendarEntity ce where ce.resourceEntities.id = :resourceId and  ce.month = :month")
+    List<CalendarEntity> findByMonthAndResouceId(Date month, Integer resourceId);
 }

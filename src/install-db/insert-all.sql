@@ -42,20 +42,45 @@ GROUP BY year
 ORDER BY year;
 
 
-select
+
+select  row_number() OVER () as id,
 	resource_name,
-	SUM(case when month = 1 then working_days else 0 end) as january,wc.january as january_wc,
-	SUM(case when month = 2 then working_days else 0 end) as february,wc.february as february_wc,
-	SUM(case when month = 3 then working_days else 0 end) as march,wc.march as march_wc,
-	SUM(case when month = 4 then working_days else 0 end) as april,wc.april as april_wc,
-	SUM(case when month = 5 then working_days else 0 end) as may,wc.may as may_wc,
-	SUM(case when month = 6 then working_days else 0 end) as june,wc.june as june_wc,
-	SUM(case when month = 7 then working_days else 0 end) as july,wc.july as july_wc,
-	SUM(case when month = 8 then working_days else 0 end) as august,wc.august as august_wc,
-	SUM(case when month = 9 then working_days else 0 end) as september,wc.september as september_wc,
-	SUM(case when month = 10 then working_days else 0 end) as october,wc.october as october_wc,
-	SUM(case when month = 11 then working_days else 0 end) as november,wc.november as november_wc,
-	SUM(case when month = 12 then working_days else 0 end) as december,wc.december as december_wc
+	SUM(case when month = 1 then working_days else 0 end) as january,
+	wc.january as january_wc,
+	rv_january,
+	SUM(case when month = 2 then working_days else 0 end) as february,
+	wc.february as february_wc,
+	rv_february,
+	SUM(case when month = 3 then working_days else 0 end) as march,
+	wc.march as march_wc,
+	rv_march,
+	SUM(case when month = 4 then working_days else 0 end) as april,
+	wc.april as april_wc,
+	rv_april,
+	SUM(case when month = 5 then working_days else 0 end) as may,
+	wc.may as may_wc,
+	rv_may,
+	SUM(case when month = 6 then working_days else 0 end) as june,
+	wc.june as june_wc,
+	rv_june,
+	SUM(case when month = 7 then working_days else 0 end) as july,
+	wc.july as july_wc,
+	rv_july,
+	SUM(case when month = 8 then working_days else 0 end) as august,
+	wc.august as august_wc,
+	rv_august,
+	SUM(case when month = 9 then working_days else 0 end) as september,
+	wc.september as september_wc,
+	rv_september,
+	SUM(case when month = 10 then working_days else 0 end) as october,
+	wc.october as october_wc,
+	rv_october,
+	SUM(case when month = 11 then working_days else 0 end) as november,
+	wc.november as november_wc,
+	rv_november,
+	SUM(case when month = 12 then working_days else 0 end) as december,
+	wc.december as december_wc,
+	rv_december
 from
 	(
 	select
@@ -63,12 +88,43 @@ from
 		extract(month
 	from
 		month) as month,
-		c.working_day as working_days
+		c.working_day as working_days,
+		rv.*
 	from
 		calendar c
 	join
     resources r on
 		c.resource_entities_r_id = r.r_id
-	),working_calendar wc where year =2024
+	left join resources_vacation rv on
+		rv.rv_fiscal_code = r.r_fiscal_code
+		and rv.rv_year = 2024
+	),
+	working_calendar wc
+where
+	year = 2024
 group by
-	resource_name,wc.january,wc.february,wc.march,wc.april,wc.may,wc.june,wc.july,wc.august,wc.september,wc.october,wc.november,wc.december
+	resource_name,
+	wc.january,
+	wc.february,
+	wc.march,
+	wc.april,
+	wc.may,
+	wc.june,
+	wc.july,
+	wc.august,
+	wc.september,
+	wc.october,
+	wc.november,
+	wc.december,
+	rv_january,
+	rv_april,
+	rv_august,
+	rv_december,
+	rv_february,
+	rv_july,
+	rv_june,
+	rv_march,
+	rv_may,
+	rv_november,
+	rv_october,
+	rv_september

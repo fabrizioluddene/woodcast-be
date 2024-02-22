@@ -2,29 +2,26 @@ package it.woodcast.logic;
 
 import it.woodcast.entity.BatchRegistryEntity;
 import it.woodcast.entity.CalendarEntity;
-import it.woodcast.entity.WorkingCalendarEntity;
 import it.woodcast.enumeration.RulesEnum;
 import it.woodcast.mapper.BatchRegistryMapper;
 import it.woodcast.repository.CalendarRepository;
-import it.woodcast.repository.WorkingCalendarRepository;
 import it.woodcast.resources.*;
 import it.woodcast.resources.dashboard.graph.CalendarGraphDashbordResource;
 import it.woodcast.services.BatchRegistryServices;
 import it.woodcast.services.CustomerServices;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.xml.crypto.Data;
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component
-
 public class ForecastFacade extends BaseFacade {
     @Autowired
     private CustomerServices customerServices;
@@ -33,10 +30,6 @@ public class ForecastFacade extends BaseFacade {
     private BatchRegistryServices batchRegistryServices;
     @Autowired
     private BatchRegistryMapper batchRegistryMapper;
-
-    @Autowired
-    WorkingCalendarRepository workingCalendarRepository;
-
 
     @Autowired
     private CalendarRepository calendarRepository;
@@ -123,7 +116,7 @@ public class ForecastFacade extends BaseFacade {
     public List<CalendarPivotResource> getAllCustomerBatchRegistry(String id, String batchRegistriId)  {
 
         List<BatchRegistryEntity> batchRegistryEntities = getBatchRegistryEntities(id, batchRegistriId);
-        WorkingCalendarEntity workingCalendarEntity= workingCalendarRepository.findByYear(new BigDecimal(2024));
+
         Map<String, CalendarPivotResource> pivotMap = new HashMap<>();
         batchRegistryEntities.stream().forEach(batchRegistryEntity -> {
 
@@ -209,10 +202,7 @@ public class ForecastFacade extends BaseFacade {
         return revenuesCostsResource;
     }
 
-    private BigDecimal getExpectedMarginEU(BatchRegistry batchRegistry) {
-        BigDecimal expectedMarginEU = (batchRegistry.getExpectedMargin().multiply(batchRegistry.getProceeds())).divide(BigDecimal.valueOf(100));
-        return expectedMarginEU;
-    }
+
 
     private StoplightEnum evaluateStolight(BigDecimal expectingPreceed, BigDecimal revenues) {
         BigDecimal diff = expectingPreceed.subtract(revenues);
@@ -227,44 +217,6 @@ public class ForecastFacade extends BaseFacade {
         }
         return StoplightEnum.GREEN;
     }
-
-    private BigDecimal getWorkableDays(WorkingCalendarEntity workingCalendarEntity,Date data){
-        SimpleDateFormat sdf = new SimpleDateFormat("MM");
-        String dataString = sdf.format(data);
-
-        BigDecimal workableDays = BigDecimal.ZERO;
-        switch (dataString) {
-            case "01":
-                return workingCalendarEntity.getJanuary();
-
-            case "02":
-                return workingCalendarEntity.getFebruary();
-            case "03":
-                return workingCalendarEntity.getMarch();
-            case "04":
-                return workingCalendarEntity.getApril();
-            case "05":
-                return workingCalendarEntity.getMay();
-            case "06":
-                return workingCalendarEntity.getJune();
-            case "07":
-                return workingCalendarEntity.getJuly();
-            case "08":
-                return workingCalendarEntity.getAugust();
-            case "09":
-                return workingCalendarEntity.getSeptember();
-            case "10":
-                return workingCalendarEntity.getOctober();
-            case "11":
-                return workingCalendarEntity.getNovember();
-            case "12":
-                return workingCalendarEntity.getDecember();
-            default:
-                return BigDecimal.ZERO;
-        }
-
-    }
-
 
     private String dateToString(Date data) {
         Map<String, String> stringStringMap = new HashMap<>();

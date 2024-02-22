@@ -26,7 +26,7 @@ public class UserController {
         return ResponseEntity.ok(loginFacade.login(userResource.getPassword(),userResource.getUsername()));
     }
 
-    @PostMapping("/")
+    @PostMapping("/save")
     public ResponseEntity<UserResource> save(@RequestBody UserResource userResource) {
         return ResponseEntity.ok(loginFacade.save(userResource));
     }
